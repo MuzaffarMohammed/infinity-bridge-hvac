@@ -113,8 +113,8 @@
   var data = {
     "clientId": "4",
     "name": this_form.find('.form-control')[0].value,
-    "contactNo":this_form.find('.form-control')[1].value,
-    "email":this_form.find('.form-control')[2].value,
+    "contactNo":this_form.find('.form-control')[2].value,
+    "email":this_form.find('.form-control')[1].value,
     "message":this_form.find('.form-control')[3].value
   }
     mail(this_form, action, data);
