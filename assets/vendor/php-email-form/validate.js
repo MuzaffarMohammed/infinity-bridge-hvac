@@ -1,7 +1,8 @@
-/**
-* PHP Email Form Validation - v2.3
-* URL: https://bootstrapmade.com/php-email-form/
-* Author: BootstrapMade.com
+/*
+* Version: Appseonit - v1.0.0
+* URL: https://infinitybridgehvac.com/
+* Author: www.appseonit.com
+* License: https://www.appseonit.com
 */
 !(function($) {
   "use strict";
@@ -109,24 +110,21 @@
     this_form.find('.error-message').slideUp();
     this_form.find('.loading').slideDown();
 
-    if ( $(this).data('recaptcha-site-key') ) {
-      var recaptcha_site_key = $(this).data('recaptcha-site-key');
-      grecaptcha.ready(function() {
-        grecaptcha.execute(recaptcha_site_key, {action: 'php_email_form_submit'}).then(function(token) {
-          php_email_form_submit(this_form,action,this_form.serialize() + '&recaptcha-response=' + token);
-        });
-      });
-    } else {
-      php_email_form_submit(this_form,action,this_form.serialize());
-    }
-    
+  var data = {
+    "clientId": "4",
+    "name": this_form.find('.form-control')[0].value,
+    "contactNo":this_form.find('.form-control')[1].value,
+    "email":this_form.find('.form-control')[2].value,
+    "message":this_form.find('.form-control')[3].value
+  }
+    mail(this_form, action, data);
     return true;
   });
 
-  function php_email_form_submit(this_form, action, data) {
+  function mail(this_form, action, data) {
     $.ajax({
       type: "POST",
-      url: action,
+      url: "https://appseonit-mail-service.netlify.app/send",
       data: data,
       timeout: 40000
     }).done( function(msg){
